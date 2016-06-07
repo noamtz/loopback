@@ -7,6 +7,9 @@
  * Module dependencies.
  */
 
+var SG = require('strong-globalize');
+var g = SG();
+
 var loopback = require('../../lib/loopback');
 var async = require('async');
 var deprecate = require('depd')('loopback');
