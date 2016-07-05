@@ -36,7 +36,6 @@
 
  */
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -540,7 +539,7 @@ module.exports = function(ACL) {
         break;
       default:
         process.nextTick(function() {
-          var err = new Error(g.f('Invalid principal type: ', type));
+          var err = new Error(g.f('Invalid principal type: %s', type));
           err.statusCode = 400;
           cb(err);
         });

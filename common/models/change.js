@@ -7,7 +7,6 @@
  * Module Dependencies.
  */
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 

@@ -15,7 +15,6 @@
  * @inherits {Model}
  */
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -47,13 +46,13 @@ module.exports = function(Email) {
    */
 
   Email.send = function() {
-    throw new Error(g.f('You must connect the Email Model to a Mail connector'));
+    throw new Error(g.t('You must connect the Email Model to a Mail connector'));
   };
 
   /**
    * A shortcut for Email.send(this).
    */
   Email.prototype.send = function() {
-    throw new Error(g.f('You must connect the Email Model to a Mail connector'));
+    throw new Error(g.t('You must connect the Email Model to a Mail connector'));
   };
 };

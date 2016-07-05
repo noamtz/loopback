@@ -7,7 +7,6 @@
  * Module Dependencies.
  */
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -115,7 +114,7 @@ module.exports = function(AccessToken) {
             } else if (isValid) {
               cb(null, token);
             } else {
-              var e = new Error(g.f('Invalid Access Token'));
+              var e = new Error(g.t('Invalid Access Token'));
               e.status = e.statusCode = 401;
               e.code = 'INVALID_TOKEN';
               cb(e);

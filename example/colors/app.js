@@ -3,7 +3,6 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -26,4 +25,4 @@ Color.create({ name: 'blue' });
 
 app.listen(3000);
 
-g.log('a list of colors is available at http://localhost:3000/colors');
+g.log('a list of colors is available at {{http://localhost:3000/colors}}');

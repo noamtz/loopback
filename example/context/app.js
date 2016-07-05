@@ -3,7 +3,6 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -26,7 +25,7 @@ var Color = loopback.createModel('color', { 'name': String });
 Color.beforeRemote('**', function(ctx, unused, next) {
   // Inside LoopBack code, you can read the property from the context
   var ns = loopback.getCurrentContext();
-  g.log('Request to host', ns && ns.get('host'));
+  console.log(g.f('Request to host %s', ns && ns.get('host')));
   next();
 });
 
@@ -34,5 +33,5 @@ app.dataSource('db', { connector: 'memory' });
 app.model(Color, { dataSource: 'db' });
 
 app.listen(3000, function() {
-  g.log('A list of colors is available at http://localhost:3000/colors');
+  g.log('A list of colors is available at {{http://localhost:3000/colors}}');
 });

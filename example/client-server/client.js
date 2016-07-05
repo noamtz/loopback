@@ -3,7 +3,6 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -20,7 +19,7 @@ CartItem.attachTo(remote);
 
 // call the remote method
 CartItem.sum(1, function(err, total) {
-  g.log('result:', err || total);
+  console.log(g.f('result:%s', err || total));
 });
 
 // call a built in remote method

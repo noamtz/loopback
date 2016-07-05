@@ -3,7 +3,6 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-var path = require('path');
 var SG = require('strong-globalize');
 var g = SG();
 
@@ -14,6 +13,6 @@ module.exports = function(loopback) {
 
   loopback.runInContext =
   loopback.createContext = function() {
-    throw new Error(g.f('Current context is not supported in the browser.'));
+    throw new Error(g.t('Current context is not supported in the browser.'));
   };
 };
