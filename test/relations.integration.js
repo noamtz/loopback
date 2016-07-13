@@ -882,11 +882,15 @@ describe('relations - integration', function() {
         { properties: { name: 'string' },
           dataSource: 'db',
           plural: 'todo-lists',
+          forceId: false,
         }
       );
       var todoItem = app.model(
         'todoItem',
-        { properties: { content: 'string' }, dataSource: 'db' }
+        { properties: { content: 'string' },
+          dataSource: 'db',
+          forceId: false,
+        }
       );
       todoList.embedsMany(todoItem, { as: 'items' });
     });

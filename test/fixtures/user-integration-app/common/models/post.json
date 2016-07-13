@@ -1,5 +1,6 @@
 {
   "name": "post",
+  "forceId": false,
   "base": "PersistedModel",
   "properties": {
     "title": {
