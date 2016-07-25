@@ -254,19 +254,23 @@ describe('User', function() {
     });
 
     it('invalidates the user\'s accessToken when the user is deleted all', function(done) {
-      var usersId, accessTokenId;
+      var usersId = [];
+      var accessTokenId;
       async.series([
         function(next) {
-          User.create([{ name: 'myname', email: 'b@c.com', password: 'bar' },
-          { name: 'myname', email: 'd@c.com', password: 'bar' }], function(err, user) {
-            usersId = user.id;
+          User.create([
+          { name: 'myname', email: 'b@c.com', password: 'bar' },
+          { name: 'myname', email: 'd@c.com', password: 'bar' },
+          ], function(err, users) {
+            usersId[0] = users[0].id;
+            usersId[1] = users[1].id;
             next(err);
           });
         },
         function(next) {
           User.login({ email: 'b@c.com', password: 'bar' }, function(err, accessToken) {
             accessTokenId = accessToken.userId;
-            if (err) return next (err);
+            if (err) return next(err);
             assert(accessTokenId);
             next();
           });
@@ -274,7 +278,7 @@ describe('User', function() {
         function(next) {
           User.login({ email: 'd@c.com', password: 'bar' }, function(err, accessToken) {
             accessTokenId = accessToken.userId;
-            if (err) return next (err);
+            if (err) return next(err);
             assert(accessTokenId);
             next();
           });
@@ -286,9 +290,9 @@ describe('User', function() {
         },
         function(next) {
           User.find({ where: { name: 'myname' }}, function(err, userFound)  {
-            if (err) return next (err);
+            if (err) return next(err);
             expect(userFound.length).to.equal(0);
-            AccessToken.find({ where: { userId: usersId }}, function(err, tokens) {
+            AccessToken.find({ userId: { inq: usersId }}, function(err, tokens) {
               if (err) return next(err);
               expect(tokens.length).to.equal(0);
               next();

@@ -312,6 +312,7 @@ module.exports = function(User) {
       ctx.where[pkName] = { inq: ids };
 
       AccessToken.destroyAll({ userId: { inq: ids }}, next);
+      console.log('tokens deleted for users %j', ids);
     });
   });
 
