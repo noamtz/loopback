@@ -254,16 +254,17 @@ describe('User', function() {
     });
 
     it('invalidates the user\'s accessToken when the user is deleted all', function(done) {
-      var usersId = [];
+      var userIds = [];
       var accessTokenId;
       async.series([
         function(next) {
           User.create([
-          { name: 'myname', email: 'b@c.com', password: 'bar' },
-          { name: 'myname', email: 'd@c.com', password: 'bar' },
+            {name: 'myname', email: 'b@c.com', password: 'bar'},
+            {name: 'myname', email: 'd@c.com', password: 'bar'},
           ], function(err, users) {
-            usersId[0] = users[0].id;
-            usersId[1] = users[1].id;
+            users.forEach(function(user) {
+              userIds.push(user.id);
+            });
             next(err);
           });
         },
@@ -292,8 +293,9 @@ describe('User', function() {
           User.find({ where: { name: 'myname' }}, function(err, userFound)  {
             if (err) return next(err);
             expect(userFound.length).to.equal(0);
-            AccessToken.find({ userId: { inq: usersId }}, function(err, tokens) {
+            AccessToken.find({ userId: { inq: userIds }}, function(err, tokens) {
               if (err) return next(err);
+              console.log(userIds);
               expect(tokens.length).to.equal(0);
               next();
             });
